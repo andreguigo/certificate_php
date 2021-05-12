@@ -2,7 +2,7 @@
 
 define("lib", "../model/");
 
-require_once lib."lib/Autoload.php"; // Remove if using a global autoloader
+require_once lib."Lib/Autoload.php";
 require_once lib."Certificate.php";
 
 $crt = new Certificate;

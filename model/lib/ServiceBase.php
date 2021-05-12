@@ -6,9 +6,9 @@ class ServiceBase {
 
 	public function __construct() {
 		$dbhost 	= "127.0.0.1:3306";
-		$dbname 	= "certificate";
+		$dbname 	= "new_certificate";
 		$dbuser 	= "root";
-		$dbpass 	= "pass";
+		$dbpass 	= "password";
 		$dbdriver 	= "mysql";
 
 		try {
@@ -20,7 +20,6 @@ class ServiceBase {
 		}
 	}
 
-	// New instance of connection
 	public static function connect() {
 		if (!self::$db) {
 			new ServiceBase();

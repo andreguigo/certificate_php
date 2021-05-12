@@ -8,15 +8,7 @@ class Testimonial extends ServiceBase {
 		try {
 			$db = ServiceBase::connect();
 
-			// search in advance to compare if there is
-			$sl = "SELECT 
-                        event, date_event 
-                    FROM 
-                         " . $this->table . "
-                    WHERE 
-                        event LIKE :event
-                    AND
-                        date_event = :date_event";
+			$sl = "SELECT event, date_event FROM " . $this->table . " WHERE event LIKE :event AND date_event = :date_event";
 
             $stmt = $db->prepare($sl);
 
@@ -31,14 +23,7 @@ class Testimonial extends ServiceBase {
             }
 
             if (empty($result)) {
-                $query = "INSERT INTO
-							" . $this->table . "
-						SET
-							id 			= :id,
-							event 		= :event,
-							text 		= :text,
-							date_event 	= :date_event,
-							workload 	= :workload";
+                $query = "INSERT INTO " . $this->table . " SET id = :id, event = :event, text = :text, date_event = :date_event, workload = :workload";
 
                 $stmt = $db->prepare($query);
 
@@ -51,7 +36,6 @@ class Testimonial extends ServiceBase {
                 if ($stmt->execute())
                     return true;
 
-                // print error if something goes wrong
                 printf("Error %s. \n", $stmt->error);
 
                 return false;
@@ -67,12 +51,7 @@ class Testimonial extends ServiceBase {
 		try {
 			$db = ServiceBase::connect();
     		
-			$query = "DELETE 
-					FROM 
-						" . $this->table . " 
-					WHERE 
-						id = :id
-					LIMIT 1";
+			$query = "DELETE FROM " . $this->table . " WHERE id = :id LIMIT 1";
 
 			$stmt = $db->prepare($query);
 			$stmt->bindParam(":id", $this->id);
@@ -80,7 +59,6 @@ class Testimonial extends ServiceBase {
 			if ($stmt->execute())
 				return true;
 	
-			// print error if something goes wrong
 			printf("Error %s. \n", $stmt->error);
 			
 			return false;
@@ -93,11 +71,7 @@ class Testimonial extends ServiceBase {
 		try {
 			$db = ServiceBase::connect();
 
-			$query = "SELECT * 
-					FROM 
-						" . $this->table . " 
-					ORDER BY 
-						event";
+			$query = "SELECT * FROM " . $this->table . " ORDER BY event";
 
 			$stmt = $db->query($query);
 			$stmt->execute();
@@ -117,11 +91,7 @@ class Testimonial extends ServiceBase {
 		try {
 			$db = ServiceBase::connect();
 
-			$query = "SELECT * 
-					FROM 
-						" . $this->table . " 
-					WHERE 
-						id = :id";
+			$query = "SELECT * FROM " . $this->table . " WHERE id = :id";
 			
 			$stmt = $db->prepare($query);
 			

@@ -8,13 +8,7 @@ class Certificate extends ServiceBase {
         try {
             $db = ServiceBase::connect();
 
-            // search in advance to compare if there is
-            $sl = "SELECT 
-                        licensed 
-                    FROM 
-                         " . $this->table . "
-                    WHERE 
-                        licensed LIKE :licensed";
+            $sl = "SELECT licensed FROM " . $this->table . " WHERE licensed LIKE :licensed";
 
             $stmt = $db->prepare($sl);
 
@@ -27,15 +21,7 @@ class Certificate extends ServiceBase {
             }
 
             if (empty($result)) {
-                $query = "INSERT INTO
-							" . $this->table . "
-						SET
-							id 			    = :id,
-							licensed 	    = :licensed,
-							name 		    = :name,
-							email 	        = :email,
-							testimonial_id 	= :testimonial_id,
-							date_sign       = :date_sign";
+                $query = "INSERT INTO " . $this->table . " SET id = :id, licensed = :licensed, name = :name, email = :email, testimonial_id = :testimonial_id, date_sign = :date_sign";
 
                 $stmt = $db->prepare($query);
 
@@ -49,7 +35,6 @@ class Certificate extends ServiceBase {
                 if ($stmt->execute())
                     return true;
 
-                // print error if something goes wrong
                 printf("Error %s. \n", $stmt->error);
 
                 return false;
@@ -66,12 +51,7 @@ class Certificate extends ServiceBase {
         try {
             $db = ServiceBase::connect();
 
-            $query = "DELETE 
-                    FROM 
-                        " . $this->table . " 
-                    WHERE 
-                        licensed = :licensed
-                    LIMIT 1";
+            $query = "DELETE FROM " . $this->table . " WHERE licensed = :licensed LIMIT 1";
 
             $stmt = $db->prepare($query);
             $stmt->bindParam(":licensed", $this->licensed);
@@ -79,7 +59,6 @@ class Certificate extends ServiceBase {
             if ($stmt->execute())
                 return true;
 
-            // print error if something goes wrong
             printf("Error %s. \n", $stmt->error);
 
             return false;
@@ -92,11 +71,7 @@ class Certificate extends ServiceBase {
 		try {
 			$db = ServiceBase::connect();
 
-			$query = "SELECT * 
-                    FROM 
-                        " . $this->table . " 
-                    ORDER BY 
-                        name";
+			$query = "SELECT * FROM " . $this->table . " ORDER BY name";
 
 			$stmt = $db->query($query);
 			$stmt->execute();
@@ -116,11 +91,7 @@ class Certificate extends ServiceBase {
 		try {
 			$db = ServiceBase::connect();
 
-			$query = "SELECT * 
-                    FROM 
-                        " . $this->table . " 
-                    WHERE 
-                        licensed = ?";
+			$query = "SELECT * FROM " . $this->table . " WHERE licensed = ?";
 			
 			$stmt = $db->prepare($query);
 			
