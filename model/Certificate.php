@@ -2,7 +2,7 @@
 
 class Certificate extends ServiceBase {
 
-	private $table = "certificate";
+    private $table = "certificate";
 
     public function addCertificate() {
         try {
@@ -67,44 +67,44 @@ class Certificate extends ServiceBase {
         }
     }
 
-	public function readCertificate() {
-		try {
-			$db = ServiceBase::connect();
+    public function readCertificate() {
+        try {
+            $db = ServiceBase::connect();
 
-			$query = "SELECT * FROM " . $this->table . " ORDER BY name";
+            $query = "SELECT * FROM " . $this->table . " ORDER BY name";
 
-			$stmt = $db->query($query);
-			$stmt->execute();
+            $stmt = $db->query($query);
+            $stmt->execute();
 
-			$result = array();
-			while ($line = $stmt->fetch(PDO::FETCH_ASSOC)) {
-				array_push($result, $line);
-			}
+            $result = array();
+            while ($line = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                array_push($result, $line);
+            }
 
-			return $result;
-		} catch (PDOException $e) {
-			ServiceBase::error($e, __METHOD__);
-		}
-	}
+            return $result;
+        } catch (PDOException $e) {
+            ServiceBase::error($e, __METHOD__);
+        }
+    }
 
-	public function readTokenCertificate() {
-		try {
-			$db = ServiceBase::connect();
+    public function readTokenCertificate() {
+        try {
+            $db = ServiceBase::connect();
 
-			$query = "SELECT * FROM " . $this->table . " WHERE licensed = ?";
-			
-			$stmt = $db->prepare($query);
-			
-			$stmt->bindParam(1, $this->licensed);
-			$stmt->execute();
+            $query = "SELECT * FROM " . $this->table . " WHERE licensed = ?";
 
-			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $stmt = $db->prepare($query);
 
-			return $row;
-		} catch (PDOException $e) {
-			ServiceBase::error($e, __METHOD__);
-		}
-	}
+            $stmt->bindParam(1, $this->licensed);
+            $stmt->execute();
+
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $row;
+        } catch (PDOException $e) {
+            ServiceBase::error($e, __METHOD__);
+        }
+    }
 
 }
 
