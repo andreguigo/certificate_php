@@ -2,13 +2,13 @@
 
 class Testimonial extends ServiceBase {
 
-	private $table = "testimonial";
+    private $table = "testimonial";
 
-	public function addTestimonial() {
-		try {
-			$db = ServiceBase::connect();
+    public function addTestimonial() {
+        try {
+            $db = ServiceBase::connect();
 
-			$sl = "SELECT event, date_event FROM " . $this->table . " WHERE event LIKE :event AND date_event = :date_event";
+            $sl = "SELECT event, date_event FROM " . $this->table . " WHERE event LIKE :event AND date_event = :date_event";
 
             $stmt = $db->prepare($sl);
 
@@ -42,69 +42,69 @@ class Testimonial extends ServiceBase {
             }
 
             return false;
-		} catch (PDOException $e) {
-			ServiceBase::error($e, __METHOD__);
-		}
-	}
+        } catch (PDOException $e) {
+            ServiceBase::error($e, __METHOD__);
+        }
+    }
 
-	public function delTestimonial() {
-		try {
-			$db = ServiceBase::connect();
-    		
-			$query = "DELETE FROM " . $this->table . " WHERE id = :id LIMIT 1";
+    public function delTestimonial() {
+        try {
+            $db = ServiceBase::connect();
 
-			$stmt = $db->prepare($query);
-			$stmt->bindParam(":id", $this->id);
-			
-			if ($stmt->execute())
-				return true;
-	
-			printf("Error %s. \n", $stmt->error);
-			
-			return false;
-		} catch (PDOException $e) {
-			ServiceBase::error($e, __METHOD__);
-		}
-	}
+            $query = "DELETE FROM " . $this->table . " WHERE id = :id LIMIT 1";
 
-	public function readTestimonial() {
-		try {
-			$db = ServiceBase::connect();
+            $stmt = $db->prepare($query);
+            $stmt->bindParam(":id", $this->id);
 
-			$query = "SELECT * FROM " . $this->table . " ORDER BY event";
+            if ($stmt->execute())
+                return true;
 
-			$stmt = $db->query($query);
-			$stmt->execute();
+            printf("Error %s. \n", $stmt->error);
 
-			$result = array();
-			while ( $line = $stmt->fetch(PDO::FETCH_ASSOC) ) {
-				array_push($result, $line);
-			}
+            return false;
+        } catch (PDOException $e) {
+            ServiceBase::error($e, __METHOD__);
+        }
+    }
 
-			return $result;
-		} catch (PDOException $e) {
-			ServiceBase::error($e, __METHOD__);
-		}
-	}
+    public function readTestimonial() {
+        try {
+            $db = ServiceBase::connect();
 
-	public function readTokenTestimonial() {
-		try {
-			$db = ServiceBase::connect();
+            $query = "SELECT * FROM " . $this->table . " ORDER BY event";
 
-			$query = "SELECT * FROM " . $this->table . " WHERE id = :id";
-			
-			$stmt = $db->prepare($query);
-			
-			$stmt->bindParam(':id', $this->id);			
-			$stmt->execute();
+            $stmt = $db->query($query);
+            $stmt->execute();
 
-			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = array();
+            while ( $line = $stmt->fetch(PDO::FETCH_ASSOC) ) {
+                array_push($result, $line);
+            }
 
-			return $row;
-		} catch (PDOException $e) {
-			ServiceBase::error($e, __METHOD__);
-		}
-	}
+            return $result;
+        } catch (PDOException $e) {
+            ServiceBase::error($e, __METHOD__);
+        }
+    }
+
+    public function readTokenTestimonial() {
+        try {
+            $db = ServiceBase::connect();
+
+            $query = "SELECT * FROM " . $this->table . " WHERE id = :id";
+
+            $stmt = $db->prepare($query);
+
+            $stmt->bindParam(':id', $this->id);			
+            $stmt->execute();
+
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return $row;
+        } catch (PDOException $e) {
+            ServiceBase::error($e, __METHOD__);
+        }
+    }
 
 }
 
