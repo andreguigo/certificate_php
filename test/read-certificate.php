@@ -1,9 +1,8 @@
 <?php
 
-define("lib", "../model/");
+use Certificate\Models\Certificate;
 
-require_once lib."Lib/Autoload.php";
-require_once lib."Certificate.php";
+require "vendor/autoload.php";
 
 $crt = new Certificate;
 $temp = $crt->readCertificate();

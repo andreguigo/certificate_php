@@ -1,18 +1,24 @@
 <?php
 
-class Certificate extends ServiceBase {
+namespace Certificate\Models;
 
-    private $table = "certificate";
+use Certificate\ServiceBase, PDO, PDOException;
 
-    public function addCertificate() {
+class Testimonial extends ServiceBase {
+
+    private $table = "testimonial";
+
+    public function addTestimonial() {
         try {
             $db = ServiceBase::connect();
 
-            $sl = "SELECT licensed FROM " . $this->table . " WHERE licensed LIKE :licensed";
+            $sl = "SELECT event, date_event FROM " . $this->table . " WHERE event LIKE :event AND date_event = :date_event";
 
             $stmt = $db->prepare($sl);
 
-            $stmt->bindParam(':licensed', $this->licensed);
+            $stmt->bindParam(':event', $this->event);
+            $stmt->bindParam(':date_event', $this->date_event);
+
             $stmt->execute();
 
             $result = array();
@@ -21,16 +27,15 @@ class Certificate extends ServiceBase {
             }
 
             if (empty($result)) {
-                $query = "INSERT INTO " . $this->table . " SET id = :id, licensed = :licensed, name = :name, email = :email, testimonial_id = :testimonial_id, date_sign = :date_sign";
+                $query = "INSERT INTO " . $this->table . " SET id = :id, event = :event, text = :text, date_event = :date_event, workload = :workload";
 
                 $stmt = $db->prepare($query);
 
                 $stmt->bindParam(':id', $this->id);
-                $stmt->bindParam(':licensed', $this->licensed);
-                $stmt->bindParam(':name', $this->name);
-                $stmt->bindParam(':email', $this->email);
-                $stmt->bindParam(':testimonial_id', $this->testimonial_id);
-                $stmt->bindParam(':date_sign', $this->date_sign);
+                $stmt->bindParam(':event', $this->event);
+                $stmt->bindParam(':text', $this->text);
+                $stmt->bindParam(':date_event', $this->date_event);
+                $stmt->bindParam(':workload', $this->workload);
 
                 if ($stmt->execute())
                     return true;
@@ -44,17 +49,16 @@ class Certificate extends ServiceBase {
         } catch (PDOException $e) {
             ServiceBase::error($e, __METHOD__);
         }
-
     }
 
-    public function delCertificate() {
+    public function delTestimonial() {
         try {
             $db = ServiceBase::connect();
 
-            $query = "DELETE FROM " . $this->table . " WHERE licensed = :licensed LIMIT 1";
+            $query = "DELETE FROM " . $this->table . " WHERE id = :id LIMIT 1";
 
             $stmt = $db->prepare($query);
-            $stmt->bindParam(":licensed", $this->licensed);
+            $stmt->bindParam(":id", $this->id);
 
             if ($stmt->execute())
                 return true;
@@ -67,17 +71,17 @@ class Certificate extends ServiceBase {
         }
     }
 
-    public function readCertificate() {
+    public function readTestimonial() {
         try {
             $db = ServiceBase::connect();
 
-            $query = "SELECT * FROM " . $this->table . " ORDER BY name";
+            $query = "SELECT * FROM " . $this->table . " ORDER BY event";
 
             $stmt = $db->query($query);
             $stmt->execute();
 
             $result = array();
-            while ($line = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            while ( $line = $stmt->fetch(PDO::FETCH_ASSOC) ) {
                 array_push($result, $line);
             }
 
@@ -87,15 +91,15 @@ class Certificate extends ServiceBase {
         }
     }
 
-    public function readTokenCertificate() {
+    public function readTokenTestimonial() {
         try {
             $db = ServiceBase::connect();
 
-            $query = "SELECT * FROM " . $this->table . " WHERE licensed = ?";
+            $query = "SELECT * FROM " . $this->table . " WHERE id = :id";
 
             $stmt = $db->prepare($query);
 
-            $stmt->bindParam(1, $this->licensed);
+            $stmt->bindParam(':id', $this->id);			
             $stmt->execute();
 
             $row = $stmt->fetch(PDO::FETCH_ASSOC);

@@ -1,0 +1,16 @@
+{
+    "name": "certificate/pck-composer",
+    "description": "Package simplified for online certificate generation.",
+    "authors": [
+        {
+            "name": "André Albuquerque",
+            "email": "andreguigo@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Certificate\\": "src"
+        }
+    }
+}

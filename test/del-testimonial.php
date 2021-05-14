@@ -1,9 +1,8 @@
 <?php
 
-define("lib", "../model/");
+use Certificate\Models\Testimonial;
 
-require_once lib."Lib/Autoload.php";
-require_once lib."Testimonial.php";
+require "vendor/autoload.php";
 
 $tml = new Testimonial;
 

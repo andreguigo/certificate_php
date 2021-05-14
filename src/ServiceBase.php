@@ -1,5 +1,9 @@
 <?php
 
+namespace Certificate;
+
+use PDO, PDOException, DateTime, DateTimeZone;
+
 class ServiceBase {
 
     protected static $db;
