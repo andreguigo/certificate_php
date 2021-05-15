@@ -19,6 +19,6 @@ $tmlid = $tml->readTokenTestimonial();
 
 ($tmlid) or exit ( "There's no event for this certificate" );
 
-echo json_encode( "{$crtid['name']}'s {$tmlid['event']} certification is true" );
+echo "{$crtid['name']}'s {$tmlid['event']} certification is true";
 
 ?>
