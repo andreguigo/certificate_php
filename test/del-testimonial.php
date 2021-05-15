@@ -2,7 +2,7 @@
 
 use Certificate\Models\Testimonial;
 
-require "vendor/autoload.php";
+require "../vendor/autoload.php";
 
 $tml = new Testimonial;
 
@@ -12,6 +12,6 @@ $temp = $tml->readTokenTestimonial();
 if ($temp)
     $temp = $tml->delTestimonial();
 
-echo json_encode($temp);
+echo $temp;
 
 ?>

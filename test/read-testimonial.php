@@ -2,7 +2,7 @@
 
 use Certificate\Models\Testimonial;
 
-require "vendor/autoload.php";
+require "../vendor/autoload.php";
 
 $tml = new Testimonial;
 $temp = $tml->readTestimonial();

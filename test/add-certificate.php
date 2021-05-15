@@ -2,7 +2,7 @@
 
 use Certificate\Models\Certificate;
 
-require "vendor/autoload.php";
+require "../vendor/autoload.php";
 
 $tml = new Certificate;
 
@@ -16,6 +16,6 @@ $tml->date_sign = date('Y-m-d');
 
 $temp = $tml->addCertificate();
 
-echo json_encode($temp);
+echo $temp;
 
 ?>

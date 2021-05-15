@@ -2,7 +2,7 @@
 
 use Certificate\Models\Testimonial;
 
-require "vendor/autoload.php";
+require "../vendor/autoload.php";
 
 $tml = new Testimonial;
 
@@ -13,6 +13,6 @@ $tml->workload      = "80";
 
 $temp = $tml->addTestimonial();
 
-echo json_encode($temp);
+echo $temp;
 
 ?>
