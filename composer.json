@@ -1,5 +1,5 @@
 {
-    "name": "certificate/pck-composer",
+    "name": "andreguigo/certificates-generator",
     "description": "Package simplified for online certificate generation.",
     "authors": [
         {
