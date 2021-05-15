@@ -20,7 +20,7 @@ class ServiceBase {
             self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             self::$db->exec("SET NAMES utf8");
         } catch (PDOException $e) {
-            echo json_encode(array('message' => 'Connection error: ' . $e->getMessage()));			
+            echo "Connection error: " . $e->getMessage();			
         }
     }
 
@@ -39,8 +39,8 @@ class ServiceBase {
         $day = $today->format("Y_m_d");
         $hour = $today->format("H:i:s");
         
-        file_put_contents("../logs/error_".$day.".log", $hour." --> ".$e->getMessage()."\n".$method." in line ".$e->getLine()."\n", FILE_APPEND);
-        echo json_encode(array('message' => 'We can`t continue.'));
+        file_put_contents(__DIR__ . "\\log\\error_" . $day . ".log", $hour . " --> " . $e->getMessage() . "\n" . $method . " in line " . $e->getLine() . "\n", FILE_APPEND);
+        echo "Oops! An error has occurred. Please consult log files\n";
     }
 
 }
