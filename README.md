@@ -1,5 +1,20 @@
-# &#x1F5DE;&#xFE0F; Criar Certificados
+# Create Certificates
 
-## Uma aplicação para geração de certificados online.
+An online certificate generation package.
 
-O aplicativo faz parte do desenvolvimento de mini projetos pessoais.
+## Building
+
+Prerequisites:
+
+* PHP Composer
+* MySQL
+ 
+## Installation
+
+### Data Base
+Run the file `database.sql` in your data base MySQL.
+
+### Package
+```
+composer require andreguigo/certificates-generator
+```
