@@ -1,13 +1,24 @@
 {
     "name": "andreguigo/certificates-generator",
     "description": "Package simplified for online certificate generation.",
+    "keywords": [
+        "certificate",
+        "certificate online",
+        "online courses"
+    ],
+    "license": [
+        "GPL-2.0-or-later"
+    ],
+    "version": "1.0.0"
     "authors": [
         {
             "name": "André Albuquerque",
             "email": "andreguigo@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "php": ">=7.1"
+    },
     "autoload": {
         "psr-4": {
             "Certificate\\": "src"
